@@ -1,81 +1,26 @@
 <?php
 
-function convertToGallons($value, $fromUnit) {
-  switch($fromUnit) {
-    case 'buckets':
-      return $value * 4;
-      break;
-    case 'butts':
-      return $value * 108;
-      break;
-    case 'firkins':
-      return $value * 9;
-      break;
-    case 'hogsheads':
-      return $value * 54;
-      break;
-    case 'pints':
-      return $value * 0.125;
-      break;
-    default:
-      return "Unsupported unit.";
+  require_once('includes/functions.php');
+
+  $fromValue = '';
+  $fromUnit = '';
+  $toUnit = '';
+  $toValue = '';
+
+  if(!isset($_POST['submit'])) {
+    $_POST['submit'] = '';
   }
-}
-  
-function convertFromGallons($value, $toUnit) {
-  switch($toUnit) {
-    case 'buckets':
-      return $value / 4;
-      break;
-    case 'butts':
-      return $value / 108;
-      break;
-    case 'firkins':
-      return $value / 9;
-      break;
-    case 'hogsheads':
-      return $value / 54;
-      break;
-    case 'pints':
-      return $value * 8;
-      break;
-    default:
-      return "Unsupported unit.";
+
+  if($_POST['submit']) {
+    $fromValue = $_POST['fromValue'];
+    $fromUnit = $_POST['fromUnit'];
+    $toUnit = $_POST['toUnit'];
+    
+    $toValue = convertVolume($fromValue, $fromUnit, $toUnit);
   }
-}
-
-function convertVolume($value, $fromUnit, $toUnit) {
-  $gallonValue = convertToGallons($value, $fromUnit);
-  $newValue = convertFromGallons($gallonValue, $toUnit);
-  return $newValue;
-}
-
-$fromValue = '';
-$fromUnit = '';
-$toUnit = '';
-$toValue = '';
-
-if(!isset($_POST['submit'])) {
-  $_POST['submit'] = '';
-}
-
-if($_POST['submit']) {
-  $fromValue = $_POST['fromValue'];
-  $fromUnit = $_POST['fromUnit'];
-  $toUnit = $_POST['toUnit'];
-  
-  $toValue = convertVolume($fromValue, $fromUnit, $toUnit);
-}
 
 ?>
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Convert Length</title>
-    <link href="styles.css" rel="stylesheet" type="text/css">
-  </head>
-  <body>
+<?php include_once 'includes/header.php'; ?>
 
     <div id="main-content">
 
@@ -90,7 +35,7 @@ if($_POST['submit']) {
             <option value="buckets"<?php if($fromUnit == 'buckets') { echo " selected"; } ?>>Buckets</option>
             <option value="butts"<?php if($fromUnit == 'butts') { echo " selected"; } ?>>Butts</option>
             <option value="firkins"<?php if($fromUnit == 'firkins') { echo " selected"; } ?>>Firkins</option>
-            <option value="hogsheads"<?php if($fromUnit == 'hogsheads') { echo " selected"; } ?>>Miles</option>
+            <option value="hogsheads"<?php if($fromUnit == 'hogsheads') { echo " selected"; } ?>>Hogsheads</option>
             <option value="pints"<?php if($fromUnit == 'pints') { echo " selected"; } ?>>Pints</option>
           </select>
         </div>
@@ -115,5 +60,6 @@ if($_POST['submit']) {
       <a href="index.php">Return to menu</a>
       
     </div>
+    <?php include_once 'includes/footer.php'; ?>
   </body>
 </html>

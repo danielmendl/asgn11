@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Measurement Conversion</title>
-    <link href="styles.css" rel="stylesheet" type="text/css">
-  </head>
-  <body>
+<?php include_once 'includes/header.php'; ?>
 
     <div id="main-content">
 
@@ -17,7 +10,7 @@
       </ul>
 
       <a href="../index.html">Return to Main</a>
-  
     </div>
+    <?php include_once 'includes/footer.php'; ?>
   </body>
 </html>
